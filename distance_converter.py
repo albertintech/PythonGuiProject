@@ -1,3 +1,4 @@
+"""Distance Converter Program"""
 import tkinter as tk
 from tkinter import ttk
 from turtle import width
@@ -44,6 +45,7 @@ feet_display.grid(column=1, row=1, sticky="EW", padx=5, pady=5)
 
 calc_button.grid(column=0, row=2, columnspan=2, sticky="EW", padx=5, pady=5)
 
+# Allow for entering value with Enter or Return key on keyboard
 root.bind("<Return>", calculate_feet)
 root.bind("<KP_Enter>", calculate_feet)
 
