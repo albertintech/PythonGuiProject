@@ -24,8 +24,8 @@ buttons = ttk.Frame(root, padding=(20, 10))
 buttons.pack(fill="both")
 
 greet_button = ttk.Button(buttons, text="Greet", command=greet)
-greet_button.pack(side="left")
+greet_button.pack(side="left", fill="x", expand=True)
 quit_button = ttk.Button(buttons, text="Quit", command=root.destroy)
-quit_button.pack(side="right")
+quit_button.pack(side="right", fill="x", expand=True)
 
 root.mainloop()
