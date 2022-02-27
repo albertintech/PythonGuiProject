@@ -38,14 +38,17 @@ feet_label = ttk.Label(main, text="Feet:")
 feet_display = ttk.Label(main, textvariable=feet_value)
 calc_button = ttk.Button(main, text="Calculate", command=calculate_feet)
 
-metres_label.grid(column=0, row=0, sticky="W", padx=5, pady=5)
-metres_input.grid(column=1, row=0, sticky="EW", padx=5, pady=5)
+metres_label.grid(column=0, row=0, sticky="W")
+metres_input.grid(column=1, row=0, sticky="EW")
 metres_input.focus()
 
-feet_label.grid(column=0, row=1, sticky="W", padx=5, pady=5)
-feet_display.grid(column=1, row=1, sticky="EW", padx=5, pady=5)
+feet_label.grid(column=0, row=1, sticky="W")
+feet_display.grid(column=1, row=1, sticky="EW")
 
-calc_button.grid(column=0, row=2, columnspan=2, sticky="EW", padx=5, pady=5)
+calc_button.grid(column=0, row=2, columnspan=2, sticky="EW")
+
+for child in main.winfo_children():
+    child.grid_configure(padx=5, pady=5)
 
 # Allow for entering value with Enter or Return key on keyboard
 root.bind("<Return>", calculate_feet)
