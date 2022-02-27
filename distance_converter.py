@@ -1,19 +1,50 @@
-from curses.textpad import rectangle
 import tkinter as tk
 from tkinter import ttk
+from turtle import width
+
+# for high dpi monitors on Windows only
+try:
+    from ctypes import windll
+    windll.shcore.SetProcessDpiAwareness(1)
+except:
+    pass
 
 root = tk.Tk()
-root.geometry("600x400")
+root.title("Distance Converter")
 
-rectangle_1 = tk.Label(root, text="Rectangle 1", bg="green", fg="white")
-rectangle_1.pack(side="left", ipadx=10, ipady=10, fill="both", expand=True)
+metres_value = tk.StringVar()
+feet_value = tk.StringVar()
 
-rectangle_2 = tk.Label(root, text="Rectangle 2", bg="red", fg="white")
-rectangle_2.pack(ipadx=10, ipady=10, fill="both", expand=True)
+def calculate_feet(*args):
+    try:
+        metres = float(metres_value.get())
+        feet = metres * 3.28084
+        feet_value.set(f"{feet:.3f}")
+    except ValueError:
+        pass
 
-rectangle_3 = tk.Label(root, text="Rectangle 1", bg="black", fg="white")
-rectangle_3.pack(side="left", ipadx=10, ipady=10, fill="both")
 
-# Pack is weird, but good
+root.columnconfigure(0, weight=1)
+
+main = ttk.Frame(root, padding=(30, 15))
+main.grid()
+
+metres_label = ttk.Label(main, text="Metres:")
+metres_input = ttk.Entry(main, width=10, textvariable=metres_value)
+feet_label = ttk.Label(main, text="Feet:")
+feet_display = ttk.Label(main, textvariable=feet_value)
+calc_button = ttk.Button(main, text="Calculate", command=calculate_feet)
+
+metres_label.grid(column=0, row=0, sticky="W", padx=5, pady=5)
+metres_input.grid(column=1, row=0, sticky="EW", padx=5, pady=5)
+metres_input.focus()
+
+feet_label.grid(column=0, row=1, sticky="W", padx=5, pady=5)
+feet_display.grid(column=1, row=1, sticky="EW", padx=5, pady=5)
+
+calc_button.grid(column=0, row=2, columnspan=2, sticky="EW", padx=5, pady=5)
+
+root.bind("<Return>", calculate_feet)
+root.bind("<KP_Enter>", calculate_feet)
 
 root.mainloop()
