@@ -3,11 +3,20 @@ import tkinter as tk
 from tkinter import ttk
 
 # for high dpi monitors on Windows only
-# try:
-#     from ctypes import windll
-#     windll.shcore.SetProcessDpiAwareness(1)
-# except:
-#     pass
+try:
+    from ctypes import windll
+    windll.shcore.SetProcessDpiAwareness(1)
+except:
+    pass
+
+
+class HelloWorld(tk.Tk):
+    def __init__(self):
+        super().__init__()
+
+        self.title("Hello, World!")
+
+        UserInputFrame(self).pack()
 
 
 class UserInputFrame(ttk.Frame):
@@ -28,9 +37,5 @@ class UserInputFrame(ttk.Frame):
         print(f"Hello, {self.user_input.get()}!")
 
 
-root = tk.Tk()
-
-frame = UserInputFrame(root)
-frame.pack()
-
+root = HelloWorld()
 root.mainloop()
