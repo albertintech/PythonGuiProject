@@ -9,8 +9,14 @@ class DistanceConverter(tk.Tk):
 
         self.title("Distance Converter")
 
-        frame = MetresToFeet(self)
+        container = ttk.Frame(self)
+        container.grid(padx=60, pady=30, sticky="EW")
+
+        frame = MetresToFeet(container)
         frame.grid(row=0, column=0, sticky="NSEW")
+
+        self.bind("<Return>", frame.calculate_feet)
+        self.bind("<KP_Enter>", frame.calculate_feet)
 
 
 class MetresToFeet(ttk.Frame):
